@@ -24,11 +24,14 @@ function onImageClick(evt) {
 
     const instance = basicLightbox.create(`
         <div class="modal">
-            <img src="${evt.target.dataset.source}">
-        </div>`)
+            <img src="${evt.target.dataset.source}" width="1000px">
+        </div>`,
+        {onShow: (instance) => {
+                instance.element().querySelector('.modal').onclick = instance.close
+            }
+        })
     
     instance.show()
-
     document.addEventListener("keydown", event => {
         if (event.key ==='Escape'){
             instance.close();
